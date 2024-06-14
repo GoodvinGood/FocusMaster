@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
-
+print("Проверка")
 # Функция для обновления времени на экране
 def update_timer():
     global timer_running
