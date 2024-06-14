@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-import time
+from tkinter import ttk
 
 # Функция для обновления времени на экране
 def update_timer():
@@ -40,24 +40,39 @@ def set_custom_time():
 # Создание основного окна
 root = tk.Tk()
 root.title("Таймер для концентрации внимания")
+root.geometry("500x400")
+root.resizable(False, False)
+
+# Установка фона
+background_image = tk.PhotoImage(file="background.png")  # Замените "background.png" на путь к вашему файлу изображения
+background_label = tk.Label(root, image=background_image)
+background_label.place(relwidth=1, relheight=1)
+
+# Создание стиля
+style = ttk.Style()
+style.configure("TButton", font=("Arial", 14), padding=10)
+style.configure("TLabel", font=("Arial", 40, "bold"), background="black", foreground="white")
 
 # Переменная для отслеживания состояния таймера
 timer_running = False
 
 # Элементы интерфейса
-timer_label = tk.Label(root, text="1500", font="Arial 40 bold", bg="black", fg="white")
+timer_label = ttk.Label(root, text="1500", anchor="center", style="TLabel")
 timer_label.pack(pady=20)
 
-start_button = tk.Button(root, text="Старт", font="Arial 20", command=start_timer)
-start_button.pack(pady=10)
+button_frame = ttk.Frame(root, style="TFrame")
+button_frame.pack(pady=10)
 
-reset_button = tk.Button(root, text="Сброс", font="Arial 20", command=reset_timer)
-reset_button.pack(pady=10)
+start_button = ttk.Button(button_frame, text="Старт", command=start_timer, style="TButton")
+start_button.grid(row=0, column=0, padx=5)
 
-time_entry = tk.Entry(root, font="Arial 20", justify='center')
+reset_button = ttk.Button(button_frame, text="Сброс", command=reset_timer, style="TButton")
+reset_button.grid(row=0, column=1, padx=5)
+
+time_entry = ttk.Entry(root, font=("Arial", 20), justify='center', width=10)
 time_entry.pack(pady=10)
 
-set_time_button = tk.Button(root, text="Установить время", font="Arial 20", command=set_custom_time)
+set_time_button = ttk.Button(root, text="Установить время", command=set_custom_time, style="TButton")
 set_time_button.pack(pady=10)
 
 # Запуск основного цикла окна
